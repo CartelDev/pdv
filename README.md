@@ -50,3 +50,7 @@ php artisan migrate
 
 Acesse o projeto
 [http://localhost:8000](http://localhost:8000)
+
+Falta criar as tabelas tipo_vendas, funcionarios e Produtos (Preencher os campos nos modelos e nas migrations)
+
+posteriormente, necessário definir o modo de relacionamento entre tabelas.
