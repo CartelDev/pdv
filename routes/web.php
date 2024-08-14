@@ -16,3 +16,4 @@ DELETE	    /photos/{photo}	        destroy	photos.destroy
 */
 Route::get('/', function () { return view('usuarios.cadastro'); });
 Route::post('/usuario', 'App\Http\Controllers\UsuariosController@store')->name('userRoute.store');
+Route::post('/funcionario', 'App\Http\Controllers\FuncionariosController@store')->name('addFuncionario.store');

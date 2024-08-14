@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
-use App\Http\Requests\StoreCargoRequest;
-use App\Http\Requests\UpdateCargoRequest;
 use Illuminate\Contracts\View\View;
-use PhpParser\Node\Expr\Cast\Bool_;
 
 class CargosController extends Controller
 {
@@ -31,7 +28,7 @@ class CargosController extends Controller
      */
     public function store(Cargo $cargo)
     {
-        Cargo::create($cargo->all());
+        
     }
 
     /**

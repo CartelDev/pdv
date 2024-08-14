@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Caixa;
-use App\Http\Requests\StoreCaixaRequest;
-use App\Http\Requests\UpdateCaixaRequest;
 use Illuminate\Contracts\View\View;
 
 class CaixaController extends Controller
@@ -30,7 +28,7 @@ class CaixaController extends Controller
      */
     public function store(Caixa $caixa)
     {
-        Caixa::create($caixa->all());
+        
     }
 
     /**

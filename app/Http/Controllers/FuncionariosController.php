@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\FuncionarioService;
+
 use App\Models\Funcionario;
+use App\Services\FuncionarioService as ServicesFuncionarioService;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Client\Request;
 
 class FuncionariosController extends Controller
 {
+    protected $funcionarioService;
+
+    public function __construct(ServicesFuncionarioService $funcionarioService)
+    {
+        $this->funcionarioService = $funcionarioService;        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +38,17 @@ class FuncionariosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Funcionario $funcionario)
+    public function store(Request $request)
     {
-        Funcionario::create($funcionario->all());
+        $validatedData = $request->validate([
+           'id_funcionario'=>'required|integer|max:20',
+           'id_usuario'=>'required|integer|max:20',
+           'id_cargo'=>'required|integer|max:20' 
+        ]);
+
+        $funcionario = $this->funcionarioService->create($validatedData);
+
+        return response()->json($funcionario);
     }
 
     /**
