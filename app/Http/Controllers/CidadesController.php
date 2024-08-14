@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pais;
+use App\Models\Cidade;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class ControllerPaises extends Controller
+class CidadesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index():View
     {
-        return view('paises.index');
+        return view('cidades.index');
     }
 
     /**
@@ -27,49 +27,42 @@ class ControllerPaises extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Pais $pais)
+    public function store(Request $request)
     {
-        Pais::create(
-            $pais->only('pais', 'sigla_pais', 'observacao_pais')
-        );
+        Cidade::create($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Pais
+    public function show(String $id):Cidade
     {
-        $pais = Pais::findOrfail($id);
-        return $pais;
+        $cidade = Cidade::findOrfail($id);
+        return $cidade;
     }
 
-    public function list():Pais
-    {
-        $pais = Pais::all();
-        return $pais;
-    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id):View
     {
-        $pais = Pais::findOrfail($id);
-        if (!$pais) {
-            return view('paises.index')->with('error', 'Pais não encontrado');
+        $cidade = Cidade::findOrfail($id);
+        if (!$cidade) {
+            return view('cidades.index')->with('error', 'Cidade não encontrado');
         }
-        return view('paises.edit', compact('pais$pais'));
+        return view('cidades.edit', compact('cidade'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Pais $pais):bool
+    public function update(Cidade $cidade):bool
     {
-        $paisUpdated = Pais::findOrfail($pais->id);
-        if (!$paisUpdated) {
+        $cidadeUpdated = Cidade::findOrfail($cidade->id);
+        if (!$cidadeUpdated) {
             return false;
         }
-        $paisUpdated->update($pais->except('_token', 'id'));
+        $cidadeUpdated->update($cidade->except('_token', 'id'));
         return true;
     }
 
@@ -78,11 +71,11 @@ class ControllerPaises extends Controller
      */
     public function destroy(string $id):bool
     {
-        $pais = Pais::findOrfail($id);
-        if (!$pais) {
+        $cidade = Cidade::findOrfail($id);
+        if (!$cidade) {
             return false;
         }
-        $pais->delete();
+        $cidade->delete();
         return true;
     }
 }
