@@ -35,33 +35,27 @@ class CaixaController extends Controller
         return response()->json($this->caixaService->create($validatedData));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request)
     {
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request)
     {
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Caixa $caixa)
+    public function update(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'id_caixa'=>'required|integer|max:20', 
+            'data_fechamento'=>'required|date',
+            'valor_fechamento'=>'required|integer|max:20'
+        ]);
+
+        return response()->json($this->caixaService->update($validatedData));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request)
     {
         

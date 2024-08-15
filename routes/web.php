@@ -26,3 +26,5 @@ Route::post('/venda', 'App\Http\Controllers\VendasController@store')->name('crea
 Route::post('/produto', 'App\Http\Controllers\ProdutosController@store')->name('createProduto.store');
 Route::post('/addProduto', 'App\Http\Controllers\ProdutosController@addProduto')->name('addProduto.store');
 Route::post('/caixa', 'App\Http\Controllers\CaixaController@store')->name('createCaixa.store');
+Route::post('/fecharCaixa', 'App\Http\Controllers\CaixaController@update')->name('caixa.update');
+Route::post('/permissoes', 'App\Http\Controllers\PermissoesController@store')->name('createPermissao.store');

@@ -19,4 +19,8 @@ class CaixaRepository {
     public function findOrfail(string $id) {
         return $this->caixa->findOrfail($id);
     }
+
+    public function update(array $data) {
+        return $this->caixa->update($data);
+    }
 }

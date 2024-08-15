@@ -14,4 +14,8 @@ class CaixaService {
     public function create(array $data) {
         return $this->caixaRepository->create($data);
     }
+
+    public function update(array $data) {
+        return $this->caixaRepository->update($data);
+    }
 }
