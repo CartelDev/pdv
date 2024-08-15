@@ -29,53 +29,38 @@ class CidadesController extends Controller
      */
     public function store(Request $request)
     {
-        Cidade::create($request->all());
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(String $id):Cidade
+    public function show(String $id)
     {
-        $cidade = Cidade::findOrfail($id);
-        return $cidade;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $cidade = Cidade::findOrfail($id);
-        if (!$cidade) {
-            return view('cidades.index')->with('error', 'Cidade não encontrado');
-        }
-        return view('cidades.edit', compact('cidade'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Cidade $cidade):bool
+    public function update(Cidade $cidade)
     {
-        $cidadeUpdated = Cidade::findOrfail($cidade->id);
-        if (!$cidadeUpdated) {
-            return false;
-        }
-        $cidadeUpdated->update($cidade->except('_token', 'id'));
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $cidade = Cidade::findOrfail($id);
-        if (!$cidade) {
-            return false;
-        }
-        $cidade->delete();
-        return true;
+        
     }
 }

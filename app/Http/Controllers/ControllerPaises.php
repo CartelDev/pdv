@@ -29,60 +29,37 @@ class ControllerPaises extends Controller
      */
     public function store(Pais $pais)
     {
-        Pais::create(
-            $pais->only('pais', 'sigla_pais', 'observacao_pais')
-        );
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Pais
+    public function show(string $id)
     {
-        $pais = Pais::findOrfail($id);
-        return $pais;
+       
     }
 
-    public function list():Pais
+    public function list()
     {
-        $pais = Pais::all();
-        return $pais;
+        
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id):View
+    
+    public function edit(string $id)
     {
-        $pais = Pais::findOrfail($id);
-        if (!$pais) {
-            return view('paises.index')->with('error', 'Pais não encontrado');
-        }
-        return view('paises.edit', compact('pais$pais'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Pais $pais):bool
+    public function update(Pais $pais)
     {
-        $paisUpdated = Pais::findOrfail($pais->id);
-        if (!$paisUpdated) {
-            return false;
-        }
-        $paisUpdated->update($pais->except('_token', 'id'));
-        return true;
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $pais = Pais::findOrfail($id);
-        if (!$pais) {
-            return false;
-        }
-        $pais->delete();
-        return true;
+        
     }
 }

@@ -26,50 +26,36 @@ class estadosController extends Controller
      */
     public function store(Estado $estado) 
     {
-        Estado::create($estado->all());
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Estado {
-        $estado = estado::findorfail($id);
-        return $estado;
+    public function show(string $id) {
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Estado $estado):View
+    public function edit(Estado $estado)
     {
-        $estado = Estado::findOrfail($estado->id);
-        if (!$estado) {
-            return view('estados.index')->with('error', 'estado não encontrado');
-        }
-        return view('estados.edit', compact('estado'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Estado $estado):bool {
-        $estadoUpdated = Estado::findOrfail($estado->id);
-        if (!$estadoUpdated) {
-            return false;  
-        }
-        $estadoUpdated->update($estado->except('_token', 'id'));
-        return true;
+    public function update(Estado $estado) {
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $estado = Estado::findOrfail($id);
-        if (!$estado) {
-            return false;
-        }
-        $estado->delete();return true;
+        
     }
 }

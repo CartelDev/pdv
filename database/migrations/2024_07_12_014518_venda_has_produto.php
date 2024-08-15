@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('venda_has_produto', function (Blueprint $table) {
             $table->unsignedBigInteger('id_venda_produto');
+            $table->integer('quantidade');
             $table->unsignedBigInteger('id_produto_venda');
 
             $table->foreign('id_venda_produto')->references('id_venda')->on('vendas')->onDelete('cascade');

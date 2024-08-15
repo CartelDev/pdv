@@ -31,50 +31,35 @@ class RuasController extends Controller
      */
     public function store(Request $request)
     {
-        Rua::create($request->all());
+        
     }
 
-    public function show(string $id):Rua
+    public function show(string $id)
     {
-        $rua = Rua::findOrfail($id);
-        return $rua;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $rua = Rua::findOrfail($id);
-        if (!$rua) {
-            return view('ruas.index')->with('error', 'Rua não encontrada');
-        }
-        return view('ruas.edit', compact('rua'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request):bool
+    public function update(Request $request)
     {
-        $rua = Rua::findOrfail($request->id);
-        if (!$rua) {
-            return false;
-        }
-        $rua->update($request->except('_token', 'id'));
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $rua = Rua::findOrfail($id);
-        if (!$rua) {
-            return false;
-        }
-        $rua->delete();
-        return true;
+        
     }
 }

@@ -3,80 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produtos;
-use App\Http\Requests\StoreProdutosRequest;
-use App\Http\Requests\UpdateProdutosRequest;
+use App\Services\ProdutoService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $produtosService;
+
+    public function __construct(ProdutoService $produtosService)
+    {
+        $this->produtosService = $produtosService;
+    }
+
     public function index():View
     {
         return view('produtos.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Produtos $produtos)
+    public function store(Request $request)
     {
-        Produtos::create($produtos->all());
+        $validatedData = $request->validate([
+            'nome_produto'=>'required|string|max:255',
+            'preco_compra'=>'required|numeric|max:20',
+            'preco_venda'=>'required|numeric|max:20',
+            'descricao_produto'=>'required|string|max:255',
+            'estoque_minimo'=>'required|integer|max:20',
+            'estoque_atual'=>'required|integer|max:20'            
+        ]);
+
+        $produto = $this->produtosService->create($validatedData);
+
+        return response()->json($produto);
+    }
+
+    public function addProduto(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id_produto'=>'required|integer',
+            'quantidade'=>'required|integer',
+            'id_venda'=>'required|integer'
+        ]);
+        $this->produtosService->addProduto($validatedData);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Produtos
+    public function show(string $id)
     {
-        $produtos = Produtos::findOrfail($id);
-        return $produtos;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $produtos = Produtos::findOrfail($id);
-        if (!$produtos) {
-            return view('produtos.index')->with('error', 'Produtos não encontrado');
-        }
-        return view('produtos.edit', compact('produtos'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Produtos $produtos):bool
+    public function update(Produtos $produtos)
     {
-        $produtosUpdated = Produtos::findOrfail($produtos->id);
-        if (!$produtosUpdated) {
-            return false;
-        }
-        $produtosUpdated->update($produtos->except('_token', 'id'));
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $produtos = Produtos::findOrfail($id);
-        if (!$produtos) {
-            return false;
-        }
-        $produtos->delete();
-        return true;
+        
     }
 }

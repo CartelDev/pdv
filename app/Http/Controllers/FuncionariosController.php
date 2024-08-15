@@ -54,47 +54,32 @@ class FuncionariosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Funcionario
+    public function show(string $id)
     {
-        $funcionario = Funcionario::findOrfail($id);
-        return $funcionario;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Funcionario $funcionario):View
+    public function edit(Funcionario $funcionario)
     {
-        $funcionario = Funcionario::findOrfail($funcionario);
-        if (!$funcionario) {
-            return view('funcionarios.index')->with('error', 'Funcionário não encontrado');
-        }
-        return view('funcionarios.edit', compact('funcionario'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Funcionario $funcionario):bool
+    public function update(Funcionario $funcionario)
     {
-        $funcionarioUpdated = Funcionario::findOrfail($funcionario->id);
-        if (!$funcionarioUpdated) {
-            return false;
-        }
-        $funcionarioUpdated->update($funcionario->all());
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $funcionario = Funcionario::findOrfail($id);
-        if (!$funcionario) {
-            return false;
-        }
-        $funcionario->delete();
-        return true;
+        
     }
 }

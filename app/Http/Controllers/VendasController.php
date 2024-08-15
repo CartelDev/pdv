@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Venda;
 use App\Http\Requests\StoreVendaRequest;
 use App\Http\Requests\UpdateVendaRequest;
+use App\Services\VendaService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class VendasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $vendaService;
+
+    public function __construct(VendaService $vendaService) {
+        $this->vendaService = $vendaService;
+    }
     public function index():View
     {
         return view('vendas.index');
@@ -28,9 +32,16 @@ class VendasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Venda $venda)
+    public function store(Request $request)
     {
-        Venda::create($venda->all());
+        $validatedData = $request->validate([
+            'id_venda'=>'required|integer|max:20',
+            'id_data_venda'=>'required|date',
+            'id_caixa'=>'required|integer|max:20'
+        ]);
+        $this->vendaService->create($validatedData);
+
+        return response()->json($validatedData);
     }
 
     /**
@@ -59,12 +70,7 @@ class VendasController extends Controller
      */
     public function update(Venda $venda):bool
     {
-        $vendaUpdated = Venda::findOrfail($venda->id);
-        if (!$vendaUpdated) {
-            return false;
-        }
-        $vendaUpdated->update($venda->except('_token', 'id'));
-        return true;
+        return false;
     }
 
     /**

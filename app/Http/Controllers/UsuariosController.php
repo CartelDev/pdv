@@ -78,49 +78,32 @@ class UsuariosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Usuario
+    public function show(string $id)
     {
-        $usuario = Usuario::findOrfail($id);
-        return $usuario;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $usuario = Usuario::findOrfail($id);
-        if (!$usuario) {
-            return view('usuarios.index')->with('error', 'Usuario não encontrado');
-        }
-
-        return view('usuarios.edit', compact('usuario'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Usuario $usuario):bool
+    public function update(Usuario $usuario)
     {
-        $usuarioUpdated = Usuario::findOrfail($usuario->id);
-        if (!$usuarioUpdated) {
-            return false;
-        }
-
-        $usuarioUpdated->update($usuario->except('_token', 'id'));
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request):bool
+    public function destroy(Request $request)
     {
-        $usuario = Usuario::findOrfail($request->id);
-        if (!$usuario) {
-            return false;
-        }
-        $usuario->delete();
-        return true;
+        
     }
 }

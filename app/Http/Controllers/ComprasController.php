@@ -30,53 +30,38 @@ class ComprasController extends Controller
      */
     public function store(Compra $compra)
     {
-        Compra::create($compra->all());
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):bool
+    public function show(string $id)
     {
-        $compra = Compra::findOrfail($id);
-        return $compra;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $compra = Compra::findOrfail($id);
-        if (!$compra) {
-            return view('compras.index')->with('error', 'Compras não encontrado');
-        }
-        return view('compras.edit', compact('compra$compra'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Compra $compra):bool
+    public function update(Compra $compra)
     {
-        $compraUpdated = Compra::findOrfail($compra->id);
-        if (!$compraUpdated) {
-            return false;
-        }
-        $compraUpdated->update($compra->all());
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $compra = Compra::findOrfail($id);
-        if (!$compra) {
-            return false;
-        }
-        $compra->delete();
-        return true;
+        
     }
 }

@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meios_Pagamento;
-use App\Http\Requests\StoreMeios_PagamentoRequest;
-use App\Http\Requests\UpdateMeios_PagamentoRequest;
+use App\Services\Meios_PagamentoService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Client\Request;
 
 class Meios_PagamentosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $meios_PagamentoService;
+
+    public function __construct(Meios_PagamentoService $meios_PagamentoService) {
+        $this->meios_PagamentoService = $meios_PagamentoService;
+    }
+
     public function index()
     {
         return view('meios_pagamentos.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         
@@ -28,55 +28,39 @@ class Meios_PagamentosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Meios_Pagamento $meios_Pagamento)
+    public function store(Request $request)
     {
-        Meios_Pagamento::create($meios_Pagamento->all());
+        $validatedData = $request->validate([
+            'meio_pagamento' => 'required|string|max:100',
+            'descricao_meio_pagamento' => 'required|string|max:100',
+            'status_meio_pagamento' => 'required|string|max:100', 
+        ]);
+        $this->meios_PagamentoService->create($validatedData);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Meios_Pagamento 
+    public function show(string $id) 
     {
-        $meios_Pagamento = Meios_Pagamento::findOrfail($id);
-        return $meios_Pagamento;
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $meios_Pagamento = Meios_Pagamento::findOrfail($id);
-        if (!$meios_Pagamento) {
-            return view('meios_pagamentos.index')->with('error', 'Meio de Pagamento não encontrado');
-        }
-        return view('meios_pagamentos.edit', compact('meios_Pagamento$meios_Pagamento'));
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Meios_Pagamento $meios_Pagamento):bool
+    public function update(Meios_Pagamento $meios_Pagamento)
     {
-        $meios_PagamentoUpdated = Meios_Pagamento::findOrfail($meios_Pagamento->id);
-        if (!$meios_PagamentoUpdated) {
-            return false;
-        }
-        $meios_PagamentoUpdated->update($meios_Pagamento->except('_token', 'id'));
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $meios_Pagamento = Meios_Pagamento::findOrfail($id);
-        if (!$meios_Pagamento) {
-            return false;
-        }
-        $meios_Pagamento->delete();
-        return true;
+        
     }
 }

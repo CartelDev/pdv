@@ -30,53 +30,38 @@ class PermissoesController extends Controller
      */
     public function store(Permissao $permissao)
     {
-        Permissao::create($permissao->all());
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Permissao
+    public function show(string $id)
     {
-        $permissao = Permissao::findOrfail($id);
-        return $permissao;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $permissao = Permissao::findOrfail($id);
-        if (!$permissao) {
-            return view('permissoes.index')->with('error', 'Permissão não encontrada');
-        }
-        return view('permissoes.edit', compact('permissao'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Permissao $permissao):bool
+    public function update(Permissao $permissao)
     {
-        $permissaoUpdated = Permissao::findOrfail($permissao->id);
-        if (!$permissaoUpdated) {
-            return false;
-        }
-        $permissaoUpdated->update($permissao->all());
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $permissao = Permissao::findOrfail($id);
-        if (!$permissao) {
-            return false;
-        }
-        $permissao->delete();
-        return true;
+        
     }
 }

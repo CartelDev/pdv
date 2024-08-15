@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pagamento;
-use App\Http\Requests\StorePagamentoRequest;
-use App\Http\Requests\UpdatePagamentoRequest;
+use App\Services\PagamentoService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class PagamentosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $pagamentoService;
+
+    public function __construct(PagamentoService $pagamentoService) 
+    {
+        $this->pagamentoService = $pagamentoService;
+    }
     public function index():View
     {
         return view('pagamentos.index');
@@ -28,55 +31,43 @@ class PagamentosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Pagamento $pagamento)
+    public function store(Request $request)
     {
-        Pagamento::create($pagamento->all());
+        $validatedData = $request->validate([
+            'data_pagamento' => 'required|date',
+            'valor_pagamento' => 'required|integer|max:20',
+            'id_meios_pagamento' => 'required|integer|max:20',
+            'id_venda' => 'required|integer|max:20',
+        ]);
+        $this->pagamentoService->create($$validatedData);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id):Pagamento
+    public function show(string $id)
     {
-        $pagamento = Pagamento::findOrfail($id);
-        return $pagamento;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $pagamento = Pagamento::findOrfail($id);
-        if (!$pagamento) {
-            return view('pagamentos.index')->with('error', 'Pagamento não encontrado');
-        }
-        return view('pagamentos.edit', compact('pagamento$pagamento'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Pagamento $pagamento):bool
+    public function update(Pagamento $pagamento)
     {
-        $pagamentoUpdated = Pagamento::findOrfail($pagamento->id);
-        if (!$pagamentoUpdated) {
-            return false;
-        }
-        $pagamentoUpdated->update($pagamento->except('_token', 'id'));
-        return true;
+       
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $pagamento = Pagamento::findOrfail($id);
-        if (!$pagamento) {
-            return false;
-        }
-        $pagamento->delete();
-        return true;
+        
     }
 }

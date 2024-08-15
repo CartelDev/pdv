@@ -30,53 +30,38 @@ class ClientesController extends Controller
      */
     public function store(Cliente $cliente)
     {
-        Cliente::create($cliente->all());
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Cliente
+    public function show(string $id)
     {
-        $cliente = Cliente::findOrfail($id);
-        return $cliente;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $cliente = Cliente::findOrfail($id);
-        if (!$cliente) {
-            return view('clientes.index')->with('error', 'Cliente não encontrado');
-        }
-        return view('clientes.edit', compact('cliente'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Cliente $cliente):bool
+    public function update(Cliente $cliente)
     {
-        $clienteUpdated = Cliente::findOrfail($cliente->id);
-        if (!$clienteUpdated) {
-            return false;
-        }
-        $clienteUpdated->update($cliente->all());
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(string $id)
     {
-        $cliente = Cliente::findOrfail($id);
-        if (!$cliente) {
-            return false;
-        }
-        $cliente->delete();
-        return true;
+        
     }
 }

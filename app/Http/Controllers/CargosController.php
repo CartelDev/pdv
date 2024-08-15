@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cargo;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class CargosController extends Controller
 {
@@ -26,7 +27,7 @@ class CargosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Cargo $cargo)
+    public function store(Request $request)
     {
         
     }
@@ -34,44 +35,29 @@ class CargosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Cargo
+    public function show(Request $request)
     {
-        $cargo = Cargo::findOrfail($id);
-        return $cargo;
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(Request $request)
     {
-        $cargo = Cargo::findOrfail($id);
-        if (!$cargo) {
-            return view('cargos.index')->with('error', 'Cargo não encontrado');
-        }
-        return view('cargos.edit', compact('cargo$cargo'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Cargo $cargo):bool
+    public function update(Request $request)
     {
-        $cargoUpdated = Cargo::findOrfail($cargo->id);
-        if (!$cargoUpdated) {
-            return false;
-        }
-        $cargoUpdated->update($cargo->all());
-        return true;
+        
     }
 
-    public function destroy(string $id):bool
+    public function destroy(Request $request)
     {
-        $cargo = Cargo::findOrfail($id);
-        if (!$cargo) {
-            return false;
-        }
-        $cargo->delete();
-        return true;
+        
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Caixa;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class CaixaController extends Controller
 {
@@ -34,47 +35,32 @@ class CaixaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id):Caixa
+    public function show(Request $request)
     {
-        $caixa = Caixa::findOrfail($id);
-        return $caixa;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(Request $request)
     {
-        $caixa = Caixa::findOrfail($id);
-        if (!$caixa) {
-            return view('caixas.index')->with('error', 'Caixa não encontrado');
-        }
-        return view('caixas.edit', compact('caixa'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Caixa $caixa):bool
+    public function update(Caixa $caixa)
     {
-        $caixaUpdated = Caixa::findOrfail($caixa->id);
-        if (!$caixaUpdated) {
-            return false;
-        }
-        $caixaUpdated->update($caixa->all());
-        return true;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):bool
+    public function destroy(Request $request)
     {
-        $caixa = Caixa::findOrfail($id);
-        if (!$caixa) {
-            return false;
-        }
-        $caixa->delete();
-        return true;
+        
     }
 }
