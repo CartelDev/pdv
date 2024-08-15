@@ -3,33 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Caixa;
+use App\Services\CaixaService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class CaixaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $caixaService;
+
+    public function __construct(CaixaService $caixaService) {
+        $this->caixaService = $caixaService;
+    }
+
     public function index():View
     {
         return view('caixas.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Caixa $caixa)
+    public function store(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'data_abertura' => 'required|date',
+            'valor_abertura' => 'required|integer|max:20',
+            'id_funcionario' => 'required|integer|max:20'
+        ]);
+        return response()->json($this->caixaService->create($validatedData));
     }
 
     /**

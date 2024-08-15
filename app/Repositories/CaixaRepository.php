@@ -2,19 +2,21 @@
 
 namespace App\Repositories;
 
+use App\Models\Caixa;
+
 class CaixaRepository {
 
-    protected $Caixa;
+    protected $caixa;
 
-    public function __construct($Caixa) {
-        $this->Caixa = $Caixa;
+    public function __construct(Caixa $caixa) {
+        $this->caixa = $caixa;
     }
 
     public function create(array $data) {
-        return $this->Caixa->create($data);
+        return $this->caixa->save($data);
     }
 
     public function findOrfail(string $id) {
-        return $this->Caixa->findOrfail($id);
+        return $this->caixa->findOrfail($id);
     }
 }

@@ -24,4 +24,5 @@ Route::post('/meiospagamento', 'App\Http\Controllers\Meios_PagamentosController@
 Route::post('/pagamento', 'App\Http\Controllers\PagamentosController@store')->name('createPagamento.store');
 Route::post('/venda', 'App\Http\Controllers\VendasController@store')->name('createVenda.store');
 Route::post('/produto', 'App\Http\Controllers\ProdutosController@store')->name('createProduto.store');
-Route::post('addProduto', 'App\Http\Controllers\ProdutosController@addProduto')->name('addProduto.store');
+Route::post('/addProduto', 'App\Http\Controllers\ProdutosController@addProduto')->name('addProduto.store');
+Route::post('/caixa', 'App\Http\Controllers\CaixaController@store')->name('createCaixa.store');

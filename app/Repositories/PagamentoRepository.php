@@ -24,6 +24,6 @@ class PagamentoRepository {
         $this->pagamento->valor_pagamento = $data['valor_pagamento'];
         $this->pagamento->meio_pagamento()->associate($meio);
         $this->pagamento->venda()->associate($venda);
-        return $this->pagamento->create($this->pagamento->toArray());
+        return $this->pagamento->save($this->pagamento->toArray());
     }
 }

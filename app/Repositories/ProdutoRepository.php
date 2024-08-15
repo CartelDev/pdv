@@ -16,7 +16,7 @@ class ProdutoRepository {
     }
 
     public function create(array $data) {
-        return $this->produto->create($data);
+        return $this->produto->save($data);
     }
 
     public function addProduto(array $data) {

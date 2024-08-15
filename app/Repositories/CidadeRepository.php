@@ -13,7 +13,7 @@ Class CidadeRepository {
     }
 
     public function create(array $cidade) {
-        $this->cidade->create($cidade);
+        $this->cidade->save($cidade);
     }
 
     public function findByName(string $cidade) {
