@@ -18,7 +18,7 @@ Class UsuarioService {
 
     public function Create(array $data) {
         $data['senha_usuario'] = hash::make($data['senha_usuario']);
-        return $this->usuarioRepository->create($this->getUsuario($data));
+        return $this->usuarioRepository->create($this->getUsuario($data),$data['tipo_usuario']);
     }
 
     public function getUsuario(array $user) {
@@ -30,6 +30,7 @@ Class UsuarioService {
         $usuario['email_usuario'] = $user['email_usuario'];
         $usuario['numero_residencia'] = $user['numero_residencia'];
         $usuario['cpf_usuario'] = $user['cpf_usuario'];
+        
 
         return $usuario;
     }

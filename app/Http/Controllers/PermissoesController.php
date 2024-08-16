@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permissao;
-use App\Http\Requests\StorePermissaoRequest;
-use App\Http\Requests\UpdatePermissaoRequest;
+use App\Services\PermissaoService;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PermissoesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $permissaoService;
+
+    public function __construct(PermissaoService $permissaoService)
+    {
+        $this->permissaoService = $permissaoService;
+    }
     public function index():View
     {
         return view('permissoes.index');
@@ -28,9 +31,30 @@ class PermissoesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Permissao $permissao)
+    public function store(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'nome_permissao'=>'required|string|max:255',
+            'tabela_referencia'=>'required|string|max:255',
+            'inserir'=>'required|boolean',
+            'atualizar'=>'required|boolean',
+            'excluir'=>'required|boolean',
+        ]);
+
+        return response()->json($this->permissaoService->create($validatedData));
+    }
+
+    public function addPermition(Request $request) {
+        $validatedData = $request->validate([
+            'id_usuario'=>'required|integer|max100',
+            'nome_permissao'=>'required|string|max:255',
+            'tabela_referencia'=>'required|string|max:255',
+            'inserir'=>'required|boolean',
+            'atualizar'=>'required|boolean',
+            'excluir'=>'required|boolean',
+        ]);
+
+        return response()->json($this->permissaoService->addPermition($validatedData));
     }
 
     /**

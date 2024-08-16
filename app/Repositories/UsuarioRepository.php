@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 //importação dos pacotes de repositorios
+
+use App\Enum\TipoUsuario;
 use App\Repositories\RuaRepository;
 use App\Repositories\CidadeRepository;
 use App\Repositories\EstadoRepository;
@@ -25,7 +27,12 @@ Class UsuarioRepository {
         $this->usuario = $usuario;
     }
 
-    public function create(array $data) {
+    public function create(array $data, string $tipo) {
+        $this->usuario->tipo_usuario = TipoUsuario::from($tipo);
         return $this->usuario->save($data);
+    }
+
+    public function findById(string $id) {
+        $this->usuario->findById($id);
     }
 }

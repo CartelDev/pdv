@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\TipoUsuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,12 +22,17 @@ class Usuario extends Model
         'numero_residencia',
         'cpf_usuario',
         'usuario_ativo',
+        'tipo_usuario'
     ];
 
     protected $hidden = [
         'id_usuario',
         'created_at',
         'updated_at',
+    ];
+
+    protected $casts = [
+        'tipo_usuario' => TipoUsuario::class,
     ];
 
     public function rua():BelongsToMany {

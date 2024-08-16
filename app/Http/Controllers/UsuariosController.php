@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\TipoUsuario;
 use App\Models\Pais;
 use App\Models\Usuario;
 use App\Services\CidadeService;
@@ -11,6 +12,7 @@ use App\Services\RuaService;
 use App\Services\UsuarioService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 
 class UsuariosController extends Controller
 {
@@ -55,6 +57,7 @@ class UsuariosController extends Controller
             'usuario' => 'required|string|unique:usuario|max:255',
             'senha_usuario' => 'required|string|min:8',
             'email_usuario' => 'required|email|max:255',
+            'tipo_usuario' => ['required', new Enum(TipoUsuario::class)],
             'numero_residencia' => 'required|string|max:255',
             'cpf_usuario' => 'required|string|max:255',
             'nome_rua' => 'required|string|max:255',
