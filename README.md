@@ -4,7 +4,7 @@
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone -b laravel-11-with-php-8.3 https://github.com/pdv
+git clone -b laravel-11-with-php-8.3 https://github.com/CartelDev/pdv
 ```
 ```sh
 cd app-laravel
