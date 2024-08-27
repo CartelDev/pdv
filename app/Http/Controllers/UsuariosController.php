@@ -33,9 +33,13 @@ class UsuariosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index():View
+    public function index()
     {
-        return view('usuarios.index');
+        if ($this->usuarioService->count()>0) {
+            return view('auth.login');
+        } else {
+            return view('usuarios.cadastro');
+        }
     }
 
     /**

@@ -27,6 +27,10 @@ Class UsuarioRepository {
         $this->usuario->save($data);
     }
 
+    public function count() {
+        return Usuario::count();
+    }
+
     public function findById(string $id) {
         $this->usuario->findById($id);
     }

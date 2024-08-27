@@ -21,6 +21,10 @@ Class UsuarioService {
         return $this->usuarioRepository->create($this->getUsuario($data),$data['tipo_usuario']);
     }
 
+    public function count() {
+        return $this->usuarioRepository->count();
+    }
+
     public function getUsuario(array $user) {
         $usuario['rua'] = $this->ruaRepository->findByName($user['nome_rua']);
         $usuario['nome_usuario'] = $user['nome_usuario'];

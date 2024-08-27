@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 /* 
     
@@ -15,7 +16,7 @@ DELETE	    /photos/{photo}	        destroy	photos.destroy
 
 */
 //requisições do tipo get
-Route::get('/', function () { return view('usuarios.cadastro'); });
+Route::get('/','App\Http\Controllers\UsuariosController@index');
 
 //requisições recebidas de formulários
 Route::post('/usuario', 'App\Http\Controllers\UsuariosController@store')->name('userRoute.store');
@@ -28,3 +29,4 @@ Route::post('/addProduto', 'App\Http\Controllers\ProdutosController@addProduto')
 Route::post('/caixa', 'App\Http\Controllers\CaixaController@store')->name('createCaixa.store');
 Route::post('/fecharCaixa', 'App\Http\Controllers\CaixaController@update')->name('caixa.update');
 Route::post('/permissoes', 'App\Http\Controllers\PermissoesController@store')->name('createPermissao.store');
+Route::post('/access', 'App\Http\Controllers\AccessController@auth')->name('createAccess.store');
