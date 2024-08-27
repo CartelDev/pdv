@@ -13,7 +13,10 @@ Class PaisRepository {
     }
 
     public function create(array $pais) {
-        $this->pais->save($pais);
+        $this->pais->pais = $pais['pais'];
+        $this->pais->sigla_pais = $pais['sigla_pais'];
+        $this->pais->observacao_pais = "Nada a Declarar";
+        return $this->pais->save();
     }
 
     public function findByName(string $pais) {

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ruas', function (Blueprint $table) {
             $table->id('id_rua')->autoincrement();
-            $table->string('rua', 100);
+            $table->string('nome_rua', 100);
             $table->string('cep_rua', 9);
             $table->string('observacao_rua', 100);
             $table->foreignId('id_cidade')->references('id_cidade')->on('cidades');

@@ -13,7 +13,12 @@ Class RuaRepository {
     }
 
     public function create(array $rua) {
-        $this->rua->save($rua);
+        $this->rua = new Rua();
+        $this->rua->nome_rua = $rua['nome_rua'];
+        $this->rua->cep_rua = $rua['cep_rua'];
+        $this->rua->id_cidade = $rua['id_cidade'];
+        $this->rua->observacao_rua = "Nada a Declarar denovo";
+        return $this->rua->save();
     }
 
     public function findByName(string $rua) {

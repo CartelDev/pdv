@@ -20,9 +20,9 @@ class EstadoService {
     }
 
     public function getEstado(array $estado) {
-        $est['pais'] = $this->paisRepository->findByName($estado['pais']);
+        $est['pais'] = $estado['pais'];
         $est['estado'] = $estado['estado'];
-        $est['sigla_estado'] = $estado['sigla_estado'];
+        $est['sigla_estado'] = "SP";
 
         return $est;
     }

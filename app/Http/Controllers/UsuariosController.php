@@ -54,7 +54,7 @@ class UsuariosController extends Controller
         $validatedData = $request->validate([
             'nome_usuario' => 'required|string|max:255',
             'sobrenome_usuario' => 'required|string|max:255',
-            'usuario' => 'required|string|unique:usuario|max:255',
+            'usuario' => 'required|string|unique:usuarios|max:255',
             'senha_usuario' => 'required|string|min:8',
             'email_usuario' => 'required|email|max:255',
             'tipo_usuario' => ['required', new Enum(TipoUsuario::class)],
@@ -63,11 +63,11 @@ class UsuariosController extends Controller
             'nome_rua' => 'required|string|max:255',
             'cep_rua' => 'required|string|max:255',
             'nome_cidade' => 'required|string|max:255',
-            'sigla_cidade' => 'required|string|max:255',
+            'sigla_cidade' => 'string|max:255',
             'estado' => 'required|string|max:255',
-            'sigla_estado' => 'required|string|max:255',
+            'sigla_estado' => 'string|max:255',
             'pais' => 'required|string|max:255',
-            'sigla_pais' => 'required|string|max:255'
+            'sigla_pais' => 'string|max:255'
         ]);
         $this->paisService->create($validatedData);
         $this->estadoService->create($validatedData);
@@ -75,7 +75,7 @@ class UsuariosController extends Controller
         $this->ruaService->create($validatedData);
         $usuario = $this->usuarioService->Create($validatedData);
 
-        return response()->json($usuario);
+        return view('usuarios.index');
     }
 
     /**

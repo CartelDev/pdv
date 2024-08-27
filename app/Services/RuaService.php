@@ -19,9 +19,9 @@ class RuaService {
     }
 
     public function getRua(array $rua) {
-        $r['nome_cidade'] = $this->cidadeRepository->findByName($rua['nome_cidade']);
+        $r['id_cidade'] = $this->cidadeRepository->findByName($rua['nome_cidade'])['id_cidade'];
         $r['nome_rua'] = $rua['nome_rua'];
-        $r['nome_usuario'] = $rua['cep_rua'];
+        $r['cep_rua'] = $rua['cep_rua'];
         
         return $r;
     }

@@ -37,6 +37,7 @@
                                 <h1 class="h4 text-gray-900 mb-4">Novo Usuario!</h1>
                             </div>
                             <form class="user" method="POST" action="{{route('userRoute.store')}}">
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
@@ -54,7 +55,7 @@
                                     </div>
                                     <div class="col-sm-8 mb-3 mb-sm-0">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email">
+                                        placeholder="Email" name="email_usuario">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -79,7 +80,7 @@
                                         placeholder="CEP">
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        <input type="text" name="numero" id="exampleInputUser " class="form-control form-control-user"
+                                        <input type="text" name="numero_residencia" id="exampleInputUser " class="form-control form-control-user"
                                         placeholder="Número">
                                     </div>
                                     <div class="col-sm-7 mb-3 mb-sm-0">
@@ -121,6 +122,17 @@
                             </div>
                             <div class="text-center">
                                 <a class="small" href="#">Ja Possui uma Conta? Clique Aqui!</a>
+                            </div>
+                            <div class="text-center">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

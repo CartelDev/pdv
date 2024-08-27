@@ -20,9 +20,9 @@ class CidadeService {
     }
 
     public function getCidade(array $cidade) {
-        $cid['estado'] = $this->estadoRepository->findByName($cidade['cidade']);
+        $cid['id_estado'] = $this->estadoRepository->findByName($cidade['estado'])['id_estado'];
         $cid['nome_cidade'] = $cidade['nome_cidade'];
-        $cid['nome_usuario'] = $cidade['sigla_cidade'];
+        $cid['sigla_cidade'] = "AA";
 
         return $cid;
     }

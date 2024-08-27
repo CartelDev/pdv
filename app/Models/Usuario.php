@@ -13,6 +13,8 @@ class Usuario extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'usuarios';
+
     protected $fillable = [
         'nome_usuario',
         'sobrenome_usuario',

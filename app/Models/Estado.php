@@ -25,7 +25,7 @@ class Estado extends Model
     ];
 
     public function pais():BelongsTo {
-        return $this->belongsTo(Pais::class, 'id_pais');
+        return $this->belongsTo(Pais::class);
     }
 
     public function cidade():HasMany {

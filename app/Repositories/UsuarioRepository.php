@@ -5,16 +5,8 @@ namespace App\Repositories;
 //importação dos pacotes de repositorios
 
 use App\Enum\TipoUsuario;
-use App\Repositories\RuaRepository;
-use App\Repositories\CidadeRepository;
-use App\Repositories\EstadoRepository;
-use App\Repositories\PaisRepository;
 
 //importação dos pacotes de modelo
-use App\Models\Estado;
-use App\Models\Cidade;
-use App\Models\Pais;
-use App\Models\Rua;
 use App\Models\Usuario;
 
 Class UsuarioRepository {
@@ -28,8 +20,11 @@ Class UsuarioRepository {
     }
 
     public function create(array $data, string $tipo) {
+        $this->usuario = new Usuario();
         $this->usuario->tipo_usuario = TipoUsuario::from($tipo);
-        return $this->usuario->save($data);
+        $this->usuario->fill($data);
+        $this->usuario->usuario_ativo = false;
+        $this->usuario->save($data);
     }
 
     public function findById(string $id) {

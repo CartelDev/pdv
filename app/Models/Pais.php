@@ -23,6 +23,11 @@ class Pais extends Model
         'updated_at'
     ];
 
+    public static function findByName($name)
+    {
+        return self::where('pais', $name)->first();
+    }
+    
     public function estado(): HasMany {
         return $this->hasMany(Estado::class);
     }

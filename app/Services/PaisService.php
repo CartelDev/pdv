@@ -18,7 +18,7 @@ class PaisService {
 
     public function getPais(array $pais) {
         $pa['pais'] = $pais['pais'];
-        $pa['sigla_pais'] = $pais['sigla_pais'];
+        $pa['sigla_pais'] = "BR";
 
         return $pa;
     }
