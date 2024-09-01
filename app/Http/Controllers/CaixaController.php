@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Caixa;
 use App\Services\CaixaService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;

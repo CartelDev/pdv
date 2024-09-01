@@ -19,8 +19,25 @@ class AccessController extends Controller {
         ]);
 
         if ($this->accessService->auth($validatedData)) {
+            $request->session()->regenerate();
             return redirect('/');
         } 
         return redirect('/login');
+    }
+
+    public function logout(Request $request) {
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
+
+    public function isLogged():bool {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['id'])) {
+            return true;
+        }
+        return false;
     }
 }
